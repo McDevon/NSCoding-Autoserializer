@@ -10,17 +10,6 @@
 
 @implementation TestSerializeObject
 
-/*
- @property BOOL booleanValue;
- @property double doubleValue;
- 
- @property NSArray *arrayValue;
- @property NSDictionary *dictionaryValue;
- 
- @property (strong) TestSerializeObject *ownTypeValue;
- @property CGSize structValue;
-*/
-
 - (NSString *)description
 {
     NSMutableString *array = [NSMutableString string];

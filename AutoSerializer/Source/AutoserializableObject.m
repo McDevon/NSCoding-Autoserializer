@@ -30,7 +30,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
 
 // Debug logging for serializer
 #define ENABLE_ASLOG
-//#undef ENABLE_ASLOG
+#undef ENABLE_ASLOG
 
 #endif
 
@@ -53,6 +53,8 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
     if (self = [super init]) {
         
         // Go through all the properties this object has
+        
+        // TODO: Also go through properties for parent class?
         
         uint count;
         
