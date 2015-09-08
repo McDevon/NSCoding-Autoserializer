@@ -18,6 +18,6 @@
 @interface AutoserializableObject : NSObject <NSCoding>
 
 // Override this method to list all properties, which should not be automatically serialized
-- (NSArray*) autoSerializerBlacklist;
++ (NSArray*) autoSerializerBlacklist;
 
 @end

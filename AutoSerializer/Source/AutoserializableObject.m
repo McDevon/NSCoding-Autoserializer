@@ -43,7 +43,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
 
 @implementation AutoserializableObject 
 
-- (NSArray *)autoSerializerBlacklist
++ (NSArray *)autoSerializerBlacklist
 {
     return nil;
 }
@@ -60,7 +60,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
         
         objc_property_t* properties = class_copyPropertyList([self class], &count);
         
-        NSArray *blackList = [self autoSerializerBlacklist];
+        NSArray *blackList = [[self class] autoSerializerBlacklist];
         
         // Iterate properties
         for (int i = 0; i < count ; i++)
@@ -68,7 +68,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
             const char* propertyName = property_getName(properties[i]);
             NSString *nameString = [NSString stringWithCString:propertyName encoding:NSUTF8StringEncoding];
             
-            // Do not serialize blacklisted properties
+            // Do not deserialize blacklisted properties
             if (blackList != nil && [blackList containsObject:nameString]) {
                 continue;
             }
@@ -203,7 +203,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
     
     objc_property_t* properties = class_copyPropertyList([self class], &count);
     
-    NSArray *blackList = [self autoSerializerBlacklist];
+    NSArray *blackList = [[self class] autoSerializerBlacklist];
     
     // Iterate properties
     for (int i = 0; i < count ; i++)
