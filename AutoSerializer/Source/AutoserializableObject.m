@@ -54,7 +54,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
         
         // Go through all the properties this object has
         
-        // TODO: Also go through properties for parent class?
+        // TODO: Also recursively go through properties of parent classes if not AutoserializableObject?
         
         uint count;
         
@@ -84,7 +84,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
             
             for (NSString *string in attributeArray) {
                 if ([string isEqualToString:@"R"]) {
-                    // This is a read-only property, do not encode
+                    // This is a read-only property, do not decode, as it's not encoded
                     readOnly = YES;
                     break;
                 }
@@ -137,7 +137,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
                 }
             }
             
-            // Serialize non-object type properties
+            // Deserialize non-object type properties
             else if (strncmp(type, @encode(int), 2) == 0) {
                 
                 int value = [aDecoder decodeIntForKey:nameString];
@@ -245,7 +245,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
         
         //ASLOG(@"Prop: %@: %@", nameString, attributeData);
         
-        // Get the selector for this property
+        // Get the selector for this property (getters)
         SEL selector = NSSelectorFromString(nameString);
         
         // Sanity check
@@ -257,7 +257,7 @@ NSLog(@"#Autoserializer: %@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
         if (strncmp(type, "@", 2) == 0) {
             NSArray *separated = [attributeData componentsSeparatedByString:@"\""];
             
-            // Only collect object types for properties, as they cannot be read from setter methods
+            // Only collect object types for properties, as they cannot be read from the methods
             if (separated.count > 2) {
                 NSString *typeInfo = [separated objectAtIndex:1];
                 ASLOG(@"  Property: %@, type: %@", nameString, typeInfo);
