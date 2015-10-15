@@ -28,6 +28,7 @@ int main(int argc, const char * argv[]) {
             object.intValue = 10;
             //object.IntValue = 15;
             object.booleanValue = YES;
+            object.floatValue = 432.592f;
             object.doubleValue = 423.5433;
             object.arrayValue = @[@"One", @"Two", @"Three"];
             object.dictionaryValue = @{@"Key": @"Value"};

@@ -47,4 +47,9 @@
             structObject];
 }
 
++ (NSArray *)autoSerializerBlacklist
+{
+    return @[@"doubleValue"];
+}
+
 @end
